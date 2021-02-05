@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Profile from "./pages/Profile";
+import Contact from "./pages/Contact";
 
 export default function App() {
   return (
@@ -33,6 +34,10 @@ export default function App() {
                 <Link to="/Profile">Profile</Link>
               </li>
 
+              <li>
+                <Link to="/Contact">Contact</Link>
+              </li>
+
             </ul>
           </nav>
 
@@ -52,6 +57,10 @@ export default function App() {
 
             <Route path="/Profile">
               <Profile />
+            </Route>
+
+            <Route path="/Contact">
+              <Contact />
             </Route>
 
             <Route path="/">
