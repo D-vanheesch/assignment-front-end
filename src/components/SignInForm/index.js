@@ -1,22 +1,36 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import './SignInForm.css'
 import { useForm } from "react-hook-form";
+import {Link, useHistory} from "react-router-dom";
 import axios from "axios";
+import {AuthContext, useAuthState} from "../../context/AuthContext";
 
 export default function SignInForm () {
+
+    const { login } = useContext(AuthContext);
+    const { isAuthenticated } = useAuthState();
+
     const { register, handleSubmit, errors } = useForm();
 
-    async function onSubmit(data) {
-        console.log (data)
+    const history = useHistory();
+
+    useEffect(() => {
+        if (isAuthenticated === true) {
+            history.push('/Profile');
+        }
+    }, [isAuthenticated]);
+
+        async function onSubmit(data) {
 
         try {
             const response = await axios.post (
                 'https://polar-lake-14365.herokuapp.com/api/auth/signin', {
-                username: data.username, password: data.password
+                    username: data.username,
+                    password: data.password,
                 });
 
-
-            console.log (response.data);
+            //handel het inloggen aan de voorkant af in de context met de data die we binnen hebben gekregen!
+            login (response.data);
         } catch(e) {
             console.log (e)
 
@@ -47,5 +61,6 @@ export default function SignInForm () {
         >
             Sign in
         </button>
+
     </form>
 }

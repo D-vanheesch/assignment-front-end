@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useContext} from "react";
 
 const AuthContext = createContext({});
 
-function AuthContextProvider ( { children } ) {
+function AuthContextProvider ({ children }) {
     const [authState, setAuthState] = useState({
         status: 'pending',
         error: null,
@@ -23,11 +23,39 @@ function AuthContextProvider ( { children } ) {
         }, 2000)
     }, [] );
 
+    function login (data) {
+        //token in localstorage
+        console.log (data)
+        localStorage.setItem('accessToken', data.accessToken);
+
+        // user informatie in context plaatsen
+        setAuthState({
+            ...authState,
+            user: {
+                username: data.username,
+                email: data.email,
+                roles: data.roles,
+            }
+        });
+        //als dat eenmaal gelukt is, link door naar profielpagina
+        //dit doen we in het component zelf.
+    }
+
+    function logout () {
+
+    }
+
+    //deze zou ook bij return authcontext.provider gezet kunnen worden (check providerData!)
+    // const providerData = {
+    //     ...authState,
+    //     login,
+    //     logout,
+    // }
+
     return (
-        <AuthContext.Provider value={authState}>
+        <AuthContext.Provider value={{...authState, login, logout}}>
             {authState.status === 'done' && children}
             {authState.status === 'pending' && <p>Loading...</p>}
-            { children }
         </AuthContext.Provider>
     );
 }
@@ -36,9 +64,9 @@ function useAuthState () {
     const authState = useContext (AuthContext);
 
     const isDone = authState.status === 'done';
-    const isAuthenticated = authState.status !== null && isDone;
+    const isAuthenticated = authState.user !== null && isDone;
 
-    console.log ('Hee ik ben geauthoriseerd: ', isAuthenticated);
+    //console.log ('authenticated', isAuthenticated);
 
     return {
         ...authState,
