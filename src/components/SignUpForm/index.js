@@ -1,6 +1,7 @@
 import React from "react";
 import './SignUpForm.css'
 import { useForm } from "react-hook-form";
+import {Link} from "react-router-dom";
 
 
 export default function SignUpForm () {
@@ -49,11 +50,14 @@ export default function SignUpForm () {
         />
         {errors.password && <span>This field is required</span>}
 
-        <input
+        <button
             type="submit"
-        />
+            className="form-button"
+            >
+            Sign up
+        </button>
         <span>
-            Already have an account? Login <a href="#">here</a>
+            Already have an account? Login <Link to="/Signin">Sign in</Link>
         </span>
 
     </form>
