@@ -5,34 +5,12 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Profile from "./pages/Profile";
 import Contact from "./pages/Contact";
+import Header from "./components/header";
 
 export default function App() {
   return (
-
       <div className="content">
-            {/*<ul>*/}
-            {/*  <li>*/}
-            {/*    <Link to="/">Home</Link>*/}
-            {/*  </li>*/}
-
-            {/*  <li>*/}
-            {/*    <Link to="/Signup">Sign up</Link>*/}
-            {/*  </li>*/}
-
-            {/*  <li>*/}
-            {/*    <Link to="/Signin">Sign in</Link>*/}
-            {/*  </li>*/}
-
-            {/*  <li>*/}
-            {/*    <Link to="/Profile">Profile</Link>*/}
-            {/*  </li>*/}
-
-            {/*  <li>*/}
-            {/*    <Link to="/Contact">Contact</Link>*/}
-            {/*  </li>*/}
-
-            {/*</ul>*/}
-
+        <Header/>
           <Switch>
             <Route exact path="/">
               <Home />
