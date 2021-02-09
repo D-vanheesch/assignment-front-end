@@ -42,7 +42,7 @@ function AuthContextProvider ({ children }) {
     }
 
     function logout () {
-
+        // doe dingen
     }
 
     //deze zou ook bij return authcontext.provider gezet kunnen worden (check providerData!)

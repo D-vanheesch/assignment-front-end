@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import './SignInForm.css'
 import { useForm } from "react-hook-form";
 import {Link, useHistory} from "react-router-dom";
@@ -11,6 +11,8 @@ export default function SignInForm () {
     const { isAuthenticated } = useAuthState();
 
     const { register, handleSubmit, errors } = useForm();
+    const [loading, toggleLoading] = useState(false);
+    const [error, setError] = useState('')
 
     const history = useHistory();
 
@@ -21,7 +23,9 @@ export default function SignInForm () {
     }, [isAuthenticated]);
 
         async function onSubmit(data) {
-
+            toggleLoading(true);
+            setError('');
+            console.log (data);
         try {
             const response = await axios.post (
                 'https://polar-lake-14365.herokuapp.com/api/auth/signin', {
@@ -32,9 +36,16 @@ export default function SignInForm () {
             //handel het inloggen aan de voorkant af in de context met de data die we binnen hebben gekregen!
             login (response.data);
         } catch(e) {
-            console.log (e)
-
+            console.error (e);
+            if (e.message.includes('401')) {
+                setError ('Gebruikersnaam of wachtwoord is onjuist.')
+            } else {
+                setError ('Inloggen is helaas mislukt, probeer het nogmaals.')
+            }
+            //tip: als de gebruikersnaam niet bestaat of ww is verkeerd, stuurt de backend een 401
         }
+        toggleLoading(false);
+
     }
 
     return <form onSubmit={handleSubmit(onSubmit)}>
@@ -58,9 +69,11 @@ export default function SignInForm () {
         <button
             type="submit"
             className="form-button"
+            disabled={loading}
         >
-            Sign in
+            {loading? 'Loading..' : 'Sign in'}
         </button>
+        {error && <p>{error}</p>}
 
     </form>
 }
