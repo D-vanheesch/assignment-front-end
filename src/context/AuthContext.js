@@ -42,7 +42,13 @@ function AuthContextProvider ({ children }) {
     }
 
     function logout () {
-        // doe dingen
+        //local storage leeg maken
+        //haal de user uit de context-state
+        localStorage.clear();
+        setAuthState({
+            ...authState,
+            user: null,
+        })
     }
 
     //deze zou ook bij return authcontext.provider gezet kunnen worden (check providerData!)
