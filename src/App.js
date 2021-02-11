@@ -21,6 +21,10 @@ export default function App() {
               <Home />
             </Route>
 
+            <Route exact path="/Home">
+              <Home />
+            </Route>
+
             <Route path="/Signup">
               <SignUp />
             </Route>
@@ -35,6 +39,10 @@ export default function App() {
 
             <Route path="/Contact">
               <Contact />
+            </Route>
+
+            <Route path="/">
+              <h1>404 not found</h1>
             </Route>
 
           </Switch>

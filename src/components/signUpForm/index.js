@@ -63,7 +63,7 @@ export default function SignUpForm () {
         <label htmlFor="email-adress-details">Email:</label>
         <input
             name="email"
-            type="text"
+            type="email"
             placeholder="Enter your email"
             ref={register({required: true})}
         />
@@ -88,11 +88,11 @@ export default function SignUpForm () {
         {errors.password && <span>This field is required</span>}
 
         <button
-            type="submit"
-            className="form-button"
-            disabled={loading}
-            >
-            {loading? 'Loading...' : 'Sign up'}
+        type="submit"
+        className="form-button"
+        disabled={loading}
+        >
+        {loading? 'Loading...' : 'Sign up'}
         </button>
         {error && <p>{error}</p>}
         <span>

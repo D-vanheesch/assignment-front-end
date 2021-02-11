@@ -1,6 +1,8 @@
 import React, {useEffect, useContext} from 'react';
 import {useHistory} from 'react-router-dom'
 import { AuthContext , useAuthState} from "../../context/AuthContext";
+import './Header.css'
+import SearchBar from "../searchBar";
 
 export default function Header () {
     const history = useHistory();
@@ -18,6 +20,8 @@ export default function Header () {
     return (
         <header>
             <div>
+                <>
+                <h1 className="header-title">NETFLIXXXXXXX</h1>
                 {isAuthenticated ? (
                     <button
                         type="button"
@@ -41,6 +45,7 @@ export default function Header () {
                     </button>
                     </>
                         )}
+                </>
             </div>
         </header>
     )
