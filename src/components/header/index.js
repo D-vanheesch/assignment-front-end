@@ -2,6 +2,7 @@ import React, {useEffect, useContext} from 'react';
 import {useHistory} from 'react-router-dom'
 import { AuthContext , useAuthState} from "../../context/AuthContext";
 import './Header.css'
+import NetflixHeader from "../../assets/NetflixHeader.png";
 import SearchBar from "../searchBar";
 
 export default function Header () {
@@ -19,11 +20,16 @@ export default function Header () {
 
     return (
         <header>
-            <div>
+            <div className="header-container">
                 <>
-                <h1 className="header-title">NETFLIXXXXXXX</h1>
+                <h1 className="header-title"
+                    onClick={() => history.push('/home')}
+                >
+                    NETFLIX
+                </h1>
                 {isAuthenticated ? (
-                    <button
+
+                    <button className="buttons"
                         type="button"
                         onClick={() => logout()}
                     >
@@ -31,13 +37,13 @@ export default function Header () {
                     </button>
                 ) : (
                     <>
-                    <button
+                    <button className="buttons"
                     type="button"
                     onClick={() => history.push('/signin')}
                 >
                     Sign in
                 </button>
-                    <button
+                    <button className="buttons"
                     type="button"
                     onClick={() => history.push('/signup') }
                     >

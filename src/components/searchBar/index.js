@@ -50,31 +50,38 @@ function SearchBar () {
 
     return (
         <>
-        <div className="Search-bar-container">
+            <header className="searchbar-container">
                 <form onSubmit={handleOnSubmit}>
                 {/*//search component maken voor styling?*/}
                     <input
-                        className="search-bar"
+                        className="search"
                         type="text"
-                        placeholder="Search"
+                        placeholder="Search..."
                         onKeyPress={handleOnChange}
                     />
                 </form>
-            </div>
+            </header>
 
+            <div className="movie-container">
             {movies?.map((movie) => {
-                return <li className="movie-container">
-                    <img src={movie?.img} alt="movie-img"/>
+                //country tussenbouwen voor overview?
+                return (
+                    <div className="movie">
+                    <img className="movie-image" src={movie?.img} alt="movie-img"/>
 
-                    <div className="movie-text">
-                        <h4>Title: {movie?.title}</h4>
-                        <h4> IMDB rating: {movie?.imdbrating}</h4>
-                        <h4>Year: {movie?.year}</h4>
+                <div className="movie-info">
+                        <h3>{movie?.title}</h3>
+                        <span>{movie?.imdbrating}</span>
+                        {/*<h4> Year: {movie?.year}</h4>*/}
+
+                        <div className="movie-over">
+                            <h2>Overview: </h2>
+                            <p>{movie?.synopsis}</p>
+                        </div>
+                </div>
                     </div>
-
-
-                </li>
-            })}
+                )})}
+            </div>
         </>
     )
 }

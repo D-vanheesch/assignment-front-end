@@ -1,6 +1,32 @@
+.header-container {
+    background-color: transparent;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+}
+
 .header-title {
     color: red;
-    font-size: 50px;
-    background-color: black;
-    text-align: center;
+    font-size: 80px;
+    background-color: transparent;
+    display: block;
+    margin-right: auto;
+    margin-left: fill;
+    cursor: pointer;
+}
+
+.buttons {
+    font-size: 20px;
+    border: none;
+    border-radius: 50px;
+    outline: none;
+    margin-bottom: 50px;
+    box-shadow: 0 3px 0 red;
+    color: black;
+    background-color: red;
+    justify-content: right;
+    cursor: pointer;
+
 }

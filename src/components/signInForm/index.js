@@ -50,6 +50,9 @@ export default function SignInForm () {
 
     return <form onSubmit={handleSubmit(onSubmit)}>
 
+        <h1>Sign in</h1>
+        <div className="background-signin">
+
         <label htmlFor="username-details">Username</label>
         <input
             name="username"
@@ -74,6 +77,8 @@ export default function SignInForm () {
             {loading? 'Loading..' : 'Sign in'}
         </button>
         {error && <p>{error}</p>}
+
+        </div>
 
     </form>
 }

@@ -2,3 +2,7 @@ label, input {
     display: block;
     margin: 10px;
 }
+
+.background-signin {
+    background-color: red;
+}
