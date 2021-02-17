@@ -76,7 +76,7 @@ function SearchBar () {
 
                         <div className="movie-over">
                             <h2>Overview: </h2>
-                            <p>{movie?.synopsis}</p>
+                            <p>{movie?.country}</p>
                         </div>
                 </div>
                     </div>

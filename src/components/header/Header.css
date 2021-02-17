@@ -1,5 +1,5 @@
 .header-container {
-    background-color: transparent;
+    background: url("https://jmd.im/wp-content/uploads/2017/06/blackiii_thumbnail.jpg");
     padding: 20px;
     display: flex;
     align-items: center;
@@ -10,7 +10,7 @@
 .header-title {
     color: red;
     font-size: 80px;
-    background-color: transparent;
+    /*background-color: transparent;*/
     display: block;
     margin-right: auto;
     margin-left: fill;
