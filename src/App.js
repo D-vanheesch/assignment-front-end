@@ -4,7 +4,6 @@ import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Profile from "./pages/Profile";
-import Contact from "./pages/Contact";
 import Header from "./components/header";
 import {useAuthState} from "./context/AuthContext";
 
@@ -35,10 +34,6 @@ export default function App() {
 
             <Route path="/Profile">
               {isAuthenticated ? <Profile /> : <Redirect to="/signin"/>}
-            </Route>
-
-            <Route path="/Contact">
-              <Contact />
             </Route>
 
             <Route path="/">

@@ -1,9 +1,10 @@
 import React, {useContext, useEffect, useState} from "react";
 import './SignInForm.css'
 import { useForm } from "react-hook-form";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import axios from "axios";
 import {AuthContext, useAuthState} from "../../context/AuthContext";
+import FormError from "./FormError";
 
 export default function SignInForm () {
 
@@ -55,19 +56,42 @@ export default function SignInForm () {
 
         <label htmlFor="username-details">Username</label>
         <input
-            name="username"
+            name="name"
             type="text"
-            ref={register({required: true})}
+            ref={register({
+                required: true,
+                minLength: 6,
+                pattern: /^[a-zA-Z]*$/,
+            })}
         />
-        {errors.username && <span>This field is required</span>}
+            <FormError
+                condition={errors.name?.type === 'required'}
+                message={"Please fill in your username."}
+            />
+            <FormError
+                condition={errors.name?.type === 'minLength'}
+                message={"Your username must be, at least, 6 characters long."}
+            />
+            <FormError
+                condition={errors.name?.type === 'pattern'}
+                message={"Your username must have a pattern from a to z and no random marks."}
+            />
 
         <label htmlFor="password-details">Password</label>
         <input
             name="password"
             type="password"
-            ref={register({required: true})}
+            ref={register({
+                required: true,
+                minLength: 6,
+            })}
         />
-        {errors.password && <span>This field is required</span>}
+        <FormError
+            condition={errors.name?.type === 'required'}
+            message={"This field is required."}
+        />
+
+
 
         <button
             type="submit"

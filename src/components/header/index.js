@@ -2,8 +2,6 @@ import React, {useEffect, useContext} from 'react';
 import {useHistory} from 'react-router-dom'
 import { AuthContext , useAuthState} from "../../context/AuthContext";
 import './Header.css'
-import NetflixHeader from "../../assets/NetflixHeader.png";
-import SearchBar from "../searchBar";
 
 export default function Header () {
     const history = useHistory();
@@ -52,6 +50,16 @@ export default function Header () {
                     </>
                         )}
                 </>
+
+                <div className="profile-button">
+                <button
+                    className="profile"
+                    type="button"
+                    onClick={() => history.push('/profile')}
+                >
+                    My profile
+                </button>
+            </div>
             </div>
         </header>
     )

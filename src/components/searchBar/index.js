@@ -34,7 +34,7 @@ function SearchBar () {
             }
         }
         getMovies();
-    }, [search]);
+    }, [ search ]);
 
     console.log (movies);
 
@@ -76,7 +76,7 @@ function SearchBar () {
 
                         <div className="movie-over">
                             <h2>Overview: </h2>
-                            <p>{movie?.country}</p>
+                            <p>{movie?.synopsis}</p>
                         </div>
                 </div>
                     </div>
