@@ -1,11 +1,13 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import './SignUpForm.css'
 import { useForm } from "react-hook-form";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
 export default function SignUpForm () {
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit, errors, watch } = useForm();
+    const password = useRef({});
+    password.current = watch("password", "");
 
     //state voor gebruikers feedback
     const [createUserSuccess, setCreateUserSuccess] = useState(false );
@@ -65,27 +67,59 @@ export default function SignUpForm () {
             name="email"
             type="email"
             placeholder="Enter your email"
-            ref={register({required: true})}
+            ref={register({
+                required: true,
+                message: "This field is required.",
+                validate: (value) => value.includes('@'),
+            })}
         />
-        {errors.emailAdress && <span>This field is required</span>}
+        {errors.email && <span>{ errors.email.message } }</span>}
+
 
         <label htmlFor="username-details">Username:</label>
         <input
-            name="username"
+            name="name"
             type="text"
             placeholder="Enter your username"
-            ref={register({required: true})}
+            ref={register({
+                required: true,
+                minLength: 6,
+                pattern: /^[a-zA-Z]*$/,
+                message: "This field is required.",
+            })}
         />
-        {errors.userName && <span>This field is required</span>}
+        {errors.name && <span>{errors.name.message}</span>}
+
 
         <label htmlFor="password-details">Password:</label>
         <input
             name="password"
             type="password"
             placeholder="Enter your password"
-            ref={register({required: true})}
+            ref={register({
+                required: true,
+                minLength: 6,
+                message: "Password is required.",
+            })}
         />
-        {errors.password && <span>This field is required</span>}
+        {errors.password && <span>{errors.password.message}</span>}
+
+
+        <label htmlFor="password-details-confirm">Confirm password:</label>
+        <input
+            name="confirmPassword"
+            type="password"
+            placeholder="Confirm password"
+            ref={register({
+                required: true,
+                minLength: 6,
+                message: "Password is required.",
+                validate: value =>
+                    value === password.current || "The passwords do not match"
+            })}
+            />
+        {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
+
 
         <button
         type="submit"
@@ -96,7 +130,7 @@ export default function SignUpForm () {
         </button>
         {error && <p>{error}</p>}
         <span>
-            Already have an account? Login <Link to="/Signin">Sign in</Link>
+            Already have an account? <Link to="/Signin">Sign in</Link>
         </span>
 
     </form>

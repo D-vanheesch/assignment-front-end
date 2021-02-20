@@ -70,7 +70,7 @@ export default function SignInForm () {
             />
             <FormError
                 condition={errors.name?.type === 'minLength'}
-                message={"Your username must be, at least, 6 characters long."}
+                message={"Your username must be at least 6 characters long."}
             />
             <FormError
                 condition={errors.name?.type === 'pattern'}
@@ -90,8 +90,10 @@ export default function SignInForm () {
             condition={errors.name?.type === 'required'}
             message={"This field is required."}
         />
-
-
+        <FormError
+            condition={errors.name?.type === 'minLength'}
+            message={"Your password must be at least 6 characters long."}
+        />
 
         <button
             type="submit"
