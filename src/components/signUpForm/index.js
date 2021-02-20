@@ -56,11 +56,15 @@ export default function SignUpForm () {
 
     return <form onSubmit={handleSubmit(onSubmit)}>
 
-        <h1>Registration</h1>
-
         {createUserSuccess === true && (
             <p>Registration is successfull! Click <Link to="/signin">here</Link> to sign in. </p>
         )}
+
+        <div className="flow">
+        <div className="cont">
+            <div className="form">
+        <h2>Sign up</h2>
+
 
         <label htmlFor="email-adress-details">Email:</label>
         <input
@@ -129,9 +133,13 @@ export default function SignUpForm () {
         {loading? 'Loading...' : 'Sign up'}
         </button>
         {error && <p>{error}</p>}
-        <span>
-            Already have an account? <Link to="/Signin">Sign in</Link>
-        </span>
+        <div className="below-text">
+            <h2>Already have an account? <Link to="/Signin">Sign in</Link> </h2>
+        </div>
+
+            </div>
+        </div>
+        </div>
 
     </form>
 

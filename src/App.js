@@ -33,7 +33,7 @@ export default function App() {
             </Route>
 
             <Route path="/Profile">
-              {isAuthenticated ? <Profile /> : <Redirect to="/signin"/>}
+              {/*{isAuthenticated ? <Profile /> : <Redirect to="/signin"/>}*/}
             </Route>
 
             <Route path="/">

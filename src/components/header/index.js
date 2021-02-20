@@ -35,13 +35,13 @@ export default function Header () {
                     </button>
                 ) : (
                     <>
-                    <button className="buttons"
+                    <button className="buttons-header"
                     type="button"
                     onClick={() => history.push('/signin')}
                 >
                     Sign in
                 </button>
-                    <button className="buttons"
+                    <button className="buttons-header"
                     type="button"
                     onClick={() => history.push('/signup') }
                     >
@@ -53,7 +53,7 @@ export default function Header () {
 
                 <div className="profile-button">
                 <button
-                    className="profile"
+                    className="buttons-header"
                     type="button"
                     onClick={() => history.push('/profile')}
                 >

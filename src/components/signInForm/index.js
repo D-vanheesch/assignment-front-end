@@ -51,13 +51,17 @@ export default function SignInForm () {
 
     return <form onSubmit={handleSubmit(onSubmit)}>
 
-        <h1>Sign in</h1>
-        <div className="background-signin">
+
+        <div className="flow">
+            <div className="cont">
+                <div className="form">
+                    <h2>Sign in</h2>
 
         <label htmlFor="username-details">Username</label>
         <input
             name="name"
             type="text"
+            placeholder="Enter your username"
             ref={register({
                 required: true,
                 minLength: 6,
@@ -81,6 +85,7 @@ export default function SignInForm () {
         <input
             name="password"
             type="password"
+            placeholder="Enter your password"
             ref={register({
                 required: true,
                 minLength: 6,
@@ -104,6 +109,8 @@ export default function SignInForm () {
         </button>
         {error && <p>{error}</p>}
 
+        </div>
+            </div>
         </div>
 
     </form>
