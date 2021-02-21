@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from "react";
-import './SignInForm.css'
+import './SignInForm.css';
 import { useForm } from "react-hook-form";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
 import {AuthContext, useAuthState} from "../../context/AuthContext";
-import FormError from "./FormError";
+import FormErrorSignIn from "./FormErrorSignIn";
 
 export default function SignInForm () {
 
@@ -59,7 +59,7 @@ export default function SignInForm () {
 
         <label htmlFor="username-details">Username</label>
         <input
-            name="name"
+            name="username"
             type="text"
             placeholder="Enter your username"
             ref={register({
@@ -68,15 +68,15 @@ export default function SignInForm () {
                 pattern: /^[a-zA-Z]*$/,
             })}
         />
-            <FormError
+            <FormErrorSignIn
                 condition={errors.name?.type === 'required'}
                 message={"Please fill in your username."}
             />
-            <FormError
+            <FormErrorSignIn
                 condition={errors.name?.type === 'minLength'}
                 message={"Your username must be at least 6 characters long."}
             />
-            <FormError
+            <FormErrorSignIn
                 condition={errors.name?.type === 'pattern'}
                 message={"Your username must have a pattern from a to z and no random marks."}
             />
@@ -91,11 +91,11 @@ export default function SignInForm () {
                 minLength: 6,
             })}
         />
-        <FormError
+        <FormErrorSignIn
             condition={errors.name?.type === 'required'}
             message={"This field is required."}
         />
-        <FormError
+        <FormErrorSignIn
             condition={errors.name?.type === 'minLength'}
             message={"Your password must be at least 6 characters long."}
         />
@@ -115,3 +115,4 @@ export default function SignInForm () {
 
     </form>
 }
+

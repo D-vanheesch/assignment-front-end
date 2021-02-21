@@ -1,6 +1,7 @@
 import React from "react";
 import {useAuthState} from "../context/AuthContext";
 import {Link} from "react-router-dom";
+import ProfilePage from "../components/profile";
 
 export default function Profile () {
 
@@ -13,7 +14,11 @@ export default function Profile () {
 
     return (
         <>
-            <h1>Profilepage</h1>
+
+            <h1>Profile page</h1>
+
+
+
             <p>Welcome to your profile page.</p>
             <p>Want to know what movies and series are available in your country to Netflix and Chill?
                 Click <Link to="./home">here!</Link>
@@ -27,6 +32,8 @@ export default function Profile () {
                 <p> Email: {user.email} </p>
                 </>
             )}
+
+            <ProfilePage/>
 
         </>
     )

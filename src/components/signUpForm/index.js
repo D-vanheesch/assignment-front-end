@@ -3,21 +3,24 @@ import './SignUpForm.css'
 import { useForm } from "react-hook-form";
 import {Link} from "react-router-dom";
 import axios from "axios";
+import FormErrorSignUp from "./FormErrorSignUp";
 
 export default function SignUpForm () {
     const { register, handleSubmit, errors, watch } = useForm();
-    const password = useRef({});
-    password.current = watch("password", "");
 
     //state voor gebruikers feedback
     const [createUserSuccess, setCreateUserSuccess] = useState(false );
     const [loading, toggleLoading] = useState(false);
     const [error, setError] = useState('')
 
+    const password = useRef({});
+    password.current = watch("password", "");
+
     async function onSubmit (data) {
         toggleLoading(true);
         setError('');
         console.log (data)
+
         try {
             const response = await axios.post(
                 'https://polar-lake-14365.herokuapp.com/api/auth/signup', {
@@ -27,15 +30,17 @@ export default function SignUpForm () {
                 role: ["user"],
             });
             console.log (response.data)
+
             if (response.status === 200) {
-                setCreateUserSuccess(true)
+                setCreateUserSuccess(true);
+
             }
         } catch (e) {
             console.error (e);
             if (e.message.includes('400')) {
-                setError('Er bestaat al een account met deze gebruikersnaam.')
+                setError('Account already exists.')
             } else {
-                setError('Er is iets misgegaan bij het verzenden, probeer het opnieuw.')
+                setError('Something went wrong, please try again.')
             }
         }
         toggleLoading(false);
@@ -56,11 +61,12 @@ export default function SignUpForm () {
 
     return <form onSubmit={handleSubmit(onSubmit)}>
 
+        <div className="flow">
+
         {createUserSuccess === true && (
             <p>Registration is successfull! Click <Link to="/signin">here</Link> to sign in. </p>
         )}
 
-        <div className="flow">
         <div className="cont">
             <div className="form">
         <h2>Sign up</h2>
@@ -73,26 +79,37 @@ export default function SignUpForm () {
             placeholder="Enter your email"
             ref={register({
                 required: true,
-                message: "This field is required.",
                 validate: (value) => value.includes('@'),
             })}
         />
-        {errors.email && <span>{ errors.email.message } }</span>}
-
+        <FormErrorSignUp
+            condition={errors.email?.type === 'required'}
+            message={"This field is required."}
+        />
 
         <label htmlFor="username-details">Username:</label>
         <input
-            name="name"
+            name="username"
             type="text"
             placeholder="Enter your username"
             ref={register({
                 required: true,
                 minLength: 6,
                 pattern: /^[a-zA-Z]*$/,
-                message: "This field is required.",
             })}
         />
-        {errors.name && <span>{errors.name.message}</span>}
+        <FormErrorSignUp
+            condition={errors.name?.type === 'required'}
+            message={"This field is required."}
+            />
+        <FormErrorSignUp
+             condition={errors.name?.type === 'minLength'}
+             message={"Your username must be at least 6 characters long."}
+            />
+            <FormErrorSignUp
+                condition={errors.name?.type === 'pattern'}
+                message={"Your username must have a pattern from a to z with no random marks."}
+                />
 
 
         <label htmlFor="password-details">Password:</label>
@@ -103,10 +120,17 @@ export default function SignUpForm () {
             ref={register({
                 required: true,
                 minLength: 6,
-                message: "Password is required.",
             })}
         />
-        {errors.password && <span>{errors.password.message}</span>}
+        <FormErrorSignUp
+            condition={errors.password?.type === 'required'}
+            message={"This field is required"}
+            />
+        <FormErrorSignUp
+            condition={errors.password?.type === 'minLength'}
+            message={"Your password must be at least 6 characters long"}
+        />
+
 
 
         <label htmlFor="password-details-confirm">Confirm password:</label>
@@ -117,13 +141,18 @@ export default function SignUpForm () {
             ref={register({
                 required: true,
                 minLength: 6,
-                message: "Password is required.",
                 validate: value =>
                     value === password.current || "The passwords do not match"
             })}
             />
-        {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
-
+                <FormErrorSignUp
+                    condition={errors.confirmPassword?.type === 'required'}
+                    message={"This field is required"}
+                />
+                <FormErrorSignUp
+                    condition={errors.confirmPassword?.type === 'minLength'}
+                    message={"Your password must be at least 6 characters long"}
+                />
 
         <button
         type="submit"
@@ -132,16 +161,18 @@ export default function SignUpForm () {
         >
         {loading? 'Loading...' : 'Sign up'}
         </button>
+
         {error && <p>{error}</p>}
+
         <div className="below-text">
             <h2>Already have an account? <Link to="/Signin">Sign in</Link> </h2>
         </div>
 
             </div>
+
         </div>
+
         </div>
 
     </form>
-
-
 }

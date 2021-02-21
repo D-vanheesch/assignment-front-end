@@ -36,7 +36,7 @@ function SearchBar () {
         getMovies();
     }, [ search ]);
 
-    console.log (movies);
+    console.log ("data:", movies);
 
     const handleOnSubmit = (e) => {
         e.preventDefault ();

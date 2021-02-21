@@ -27,7 +27,7 @@ export default function Header () {
                 </h1>
                 {isAuthenticated ? (
 
-                    <button className="buttons"
+                    <button className="buttons-header"
                         type="button"
                         onClick={() => logout()}
                     >
@@ -59,6 +59,18 @@ export default function Header () {
                 >
                     My profile
                 </button>
+
+                    {/*<div className="buttons-logout">*/}
+                    {/*<button*/}
+                    {/*    className="buttons-header"*/}
+                    {/*    type="button"*/}
+                    {/*    onClick={logout}*/}
+                    {/*>*/}
+                    {/*    Log out*/}
+
+                    {/*    </button>*/}
+                    {/*</div>*/}
+
             </div>
             </div>
         </header>
