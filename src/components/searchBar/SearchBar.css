@@ -96,6 +96,11 @@ body {
     transform: translateY(0%);
 }
 
+.flags {
+    max-height: 10px;
+
+}
+
 
 /*.image-container:hover {*/
 /*    transform: scale(1.08);*/

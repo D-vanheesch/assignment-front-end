@@ -3,7 +3,8 @@ import {useAuthState} from "../context/AuthContext";
 import {Link} from "react-router-dom";
 import ProfilePage from "../components/profile";
 
-export default function Profile () {
+
+export default function ProfileNewCountries () {
 
     const { user } = useAuthState();
 
@@ -32,8 +33,9 @@ export default function Profile () {
                 <p> Email: {user.email} </p>
                 </>
             )}
-
+            <div className="profile">
             <ProfilePage/>
+            </div>
 
         </>
     )

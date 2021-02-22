@@ -6,6 +6,7 @@ function SearchBar () {
 
     const [search, setSearch] = useState('');
     const [movies, setMovies] = useState();
+    const [countries, setCountries] = useState();
 
     const options = {
         method: 'GET',
@@ -36,7 +37,7 @@ function SearchBar () {
         getMovies();
     }, [ search ]);
 
-    console.log ("data:", movies);
+    // console.log ("data:", movies);
 
     const handleOnSubmit = (e) => {
         e.preventDefault ();
@@ -46,6 +47,27 @@ function SearchBar () {
     if (e.charCode === 13) {
         setSearch(e.target.value);
     }
+    }
+
+    const handleOnClick = (netflixId) => {
+        const options = {
+            method: 'GET',
+            url: 'https://unogs-unogs-v1.p.rapidapi.com/aaapi.cgi',
+            params: {t: 'loadvideo', q: netflixId},
+            headers: {
+                'x-rapidapi-key': 'adc43e01efmsh4e33b30d1f57ef9p1c5965jsn4a48b5e075ce',
+                'x-rapidapi-host': 'unogs-unogs-v1.p.rapidapi.com'
+            }
+        };
+
+        axios.request(options).then(function (response) {
+            setCountries(response.data.RESULT.country)
+        }).catch(function (error) {
+            console.error(error);
+        });
+        // if (e.charCode === 13) {
+        //     setSearch(e.target.value);
+        // }
     }
 
     return (
@@ -63,10 +85,27 @@ function SearchBar () {
             </header>
 
             <div className="movie-container">
+                {countries?.map((country) => {
+                    let countryImage  = "https://cdn.ipregistry.co/flags/emojitwo/" +country?.ccode + ".svg"
+                    //country tussenbouwen voor overview?
+                    return (
+                        <div className="movie-countries">
+                            <img className="flags" src={countryImage} />
+                            {country?.country}
+                        </div>
+
+                    )})}
+            </div>
+
+            <div className="movie-container">
             {movies?.map((movie) => {
                 //country tussenbouwen voor overview?
+
                 return (
-                    <div className="movie">
+                    <div
+                        className="movie"
+                        onClick={() => {handleOnClick (movie?.nfid) }}
+                    >
                     <img className="movie-image" src={movie?.img} alt="movie-img"/>
 
                 <div className="movie-info">
