@@ -21,7 +21,7 @@ export default function Header () {
             <div className="header-container">
                 <>
                 <h1 className="header-title"
-                    onClick={() => history.push('/home')}
+                    onClick={() => history.push('/Startpage')}
 
                 >
                     NETFLIX
@@ -51,6 +51,16 @@ export default function Header () {
                     </>
                         )}
                 </>
+
+                <div className="profile-button">
+                    <button
+                    className="buttons-header"
+                    type="button"
+                    onClick={() => history.push('/home')}
+                    >
+                        Home
+                    </button>
+                </div>
 
                 <div className="profile-button">
                 <button

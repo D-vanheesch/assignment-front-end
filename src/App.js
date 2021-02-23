@@ -6,6 +6,7 @@ import SignIn from "./pages/SignIn";
 import Profile from "./pages/Profile";
 import Header from "./components/header";
 import {useAuthState} from "./context/AuthContext";
+import StartPage from "./components/startPage";
 
 export default function App() {
 
@@ -17,10 +18,14 @@ export default function App() {
 
           <Switch>
             <Route exact path="/">
-              <Home />
+              <StartPage />
             </Route>
 
-            <Route exact path="/Home">
+            <Route path="/Startpage">
+              <StartPage/>
+            </Route>
+
+            <Route path="/Home">
               <Home />
             </Route>
 

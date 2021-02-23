@@ -1,0 +1,36 @@
+.welcome-page {
+    display: block;
+    padding-top: 50px;
+    background-image: url("https://cdn.mos.cms.futurecdn.net/98GnqFKaUMYU3GG5HxhLWZ.jpg");
+    background-position: right;
+}
+
+.start-information {
+    box-sizing: border-box;
+    background-color: black;
+    margin-left: 25%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 70px 0;
+    text-align: center;
+    border: 5px solid;
+    border-color: #660033 #CC3300;
+    width: 40%;
+}
+
+.start-information h1 {
+    background: -webkit-linear-gradient(#CC3300, #660033);
+    padding-bottom: 20px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.start-information h2 {
+    background: -webkit-linear-gradient(#CC3300, #660033);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+
