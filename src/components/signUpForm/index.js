@@ -63,9 +63,11 @@ export default function SignUpForm () {
 
         <div className="flow">
 
+            <div className="registration">
         {createUserSuccess === true && (
             <p>Registration is successfull! Click <Link to="/signin">here</Link> to sign in. </p>
         )}
+            </div>
 
         <div className="cont">
             <div className="form">

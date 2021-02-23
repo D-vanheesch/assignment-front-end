@@ -22,6 +22,7 @@ export default function Header () {
                 <>
                 <h1 className="header-title"
                     onClick={() => history.push('/home')}
+
                 >
                     NETFLIX
                 </h1>

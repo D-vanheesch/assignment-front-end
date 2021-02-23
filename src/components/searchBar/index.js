@@ -72,6 +72,10 @@ function SearchBar () {
 
     return (
         <>
+            <div className="">
+
+            </div>
+
             <header className="searchbar-container">
                 <form onSubmit={handleOnSubmit}>
                 {/*//search component maken voor styling?*/}

@@ -8,7 +8,9 @@
 }
 
 .header-title {
-    color: red;
+    background: -webkit-linear-gradient(#CC3300, #660033);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-size: 80px;
     display: block;
     margin-right: auto;
@@ -17,7 +19,9 @@
 }
 
 .header-title:hover {
-    color: #b224ef;
+    background: -webkit-linear-gradient(#660033, #CC3300);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .buttons-header {
@@ -30,14 +34,14 @@
     font-size: 18px;
     font-weight: 600;
     text-align: center;
-    background: -webkit-linear-gradient(left, #b224ef, #7579ff);
+    background: -webkit-linear-gradient(left, #CC3300, #660033);
     justify-content: right;
     cursor: pointer;
     width: 120px;
 }
 
 .buttons-header:hover {
-    background: -webkit-linear-gradient(left, #7579ff, #b224ef);
+    background: -webkit-linear-gradient(left, #660033, #CC3300);
 }
 
 

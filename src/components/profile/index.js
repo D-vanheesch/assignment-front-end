@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import "./ProfilePage.css";
 import axios from "axios";
+import {useAuthState} from "../../context/AuthContext";
 
 export default function ProfilePage () {
 
@@ -8,6 +9,9 @@ export default function ProfilePage () {
     const [oldData, setOldData] = useState();
     const [search, setSearch] = useState('')
     const [isSearched, setIsSearched] = useState(false);
+    const [availableCountries, setAvailableCountries] = useState();
+
+    const { user } = useAuthState();
 
     let countryCode = 'NL';
     if (search !== undefined && search.length > 0) {
@@ -34,6 +38,7 @@ export default function ProfilePage () {
         if (isExp) {
             period = 'exp';
         }
+
         const options = {
             method: 'GET',
             url: 'https://unogs-unogs-v1.p.rapidapi.com/aaapi.cgi',
@@ -57,6 +62,35 @@ export default function ProfilePage () {
         })
     }
 
+    // function getCountries () {
+    //     const country =
+    // }
+
+    const options = {
+        method: 'GET',
+        url: 'https://unogs-unogs-v1.p.rapidapi.com/aaapi.cgi',
+        params: {
+            t: 'lc',
+            q: 'available',
+        },
+        headers: {
+            'x-rapidapi-key': 'adc43e01efmsh4e33b30d1f57ef9p1c5965jsn4a48b5e075ce',
+            'x-rapidapi-host': 'unogs-unogs-v1.p.rapidapi.com'
+        }
+    };
+
+    useEffect(() => {
+        async function getCountries() {
+            try {
+                const response = await axios(options)
+                setAvailableCountries(response.data);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        getCountries();
+    }, [search]);
+
     const handleOnSubmit = (e) => {
         e.preventDefault ();
     }
@@ -66,34 +100,58 @@ export default function ProfilePage () {
             setSearch(e.target.value);
         }
     }
+    console.log ("check:",availableCountries);
 
-    console.log ('---------NEWDATA:-----------')
-    console.log (newData);
-    console.log ('--------OLDDATA:------------')
-    console.log (oldData);
+    // console.log ('---------NEWDATA:-----------')
+    // console.log (newData);
+    // console.log ('--------OLDDATA:------------')
+    // console.log (oldData);
 
     return (
         <div>
-            <div className="searchbar-container-countries">
-                <form onSubmit={handleOnSubmit}>
-                    {/*//search component maken voor styling?*/}
-                    <select
-                        className="search"
-                        placeholder="Search..."
-                        onChange={handleOnChange}
-                    >
-                        <option value="NL">Nederland</option>
-                        <option value="EN">Engeland</option>
-                        <option value="CH">China</option>
-                        <option value="DE">Duitsland</option>
-
-                    </select>
-
-                </form>
+            <div className="profile-information">
+            <h1>Account details:</h1>
+            {user && (
+                <>
+                    <p> Username: {user.username} </p>
+                    <p> Email: {user.email} </p>
+                </>
+            )}
+            <h2>
+                Below you will find content that will be newly released on Netflix and content that will be released soon, by country!</h2>
             </div>
 
+            {/*<div className="Country-container">*/}
+            {/*    {availableCountries?.data.map((countries) => {*/}
+            {/*        //country tussenbouwen voor overview?*/}
+            {/*        return (*/}
+            {/*            <div className="select-options">*/}
+
+            {/*            <input*/}
+            {/*                name="country-name"*/}
+            {/*                value={countries}*/}
+            {/*                onClick={handleOnSubmit}*/}
+            {/*            />*/}
+            {/*            </div>*/}
+            {/*        )})}*/}
+            {/*</div>*/}
+
             <div className="movie-container">
+
+                <header className="searchbar-container">
+                <form onSubmit={handleOnSubmit}>
+                    {/*//search component maken voor styling?*/}
+                    <input
+                        className="search"
+                        type="text"
+                        placeholder="Search..."
+                        onKeyPress={handleOnChange}
+                    />
+                </form>
+            </header>
+
                 <h1>NEW TO COME:</h1>
+
                 {newData != undefined ? newData.ITEMS?.map((movie) => {
                     //country tussenbouwen voor overview?
                     return (
@@ -134,7 +192,6 @@ export default function ProfilePage () {
                         </div>
                     )}) : '' }
             </div>
-
         </div>
     )
 }
