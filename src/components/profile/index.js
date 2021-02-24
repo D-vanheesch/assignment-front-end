@@ -83,7 +83,8 @@ export default function ProfilePage () {
         async function getCountries() {
             try {
                 const response = await axios(options)
-                setAvailableCountries(response.data);
+                // console.log ("DATA:",response.data.ITEMS)
+                setAvailableCountries(response.data.ITEMS);
             } catch (e) {
                 console.error(e);
             }
@@ -100,7 +101,15 @@ export default function ProfilePage () {
             setSearch(e.target.value);
         }
     }
-    console.log ("check:",availableCountries);
+
+    const changeCountry = (e) => {
+        getNetflixContent(e.target.value);
+        getNetflixContent(e.target.value, true);
+        console.log (e.target.value)
+        }
+
+
+    // console.log ("check:",availableCountries);
 
     // console.log ('---------NEWDATA:-----------')
     // console.log (newData);
@@ -121,76 +130,75 @@ export default function ProfilePage () {
                 Below you will find content that will be newly released on Netflix and content that will be released soon, by country!</h2>
             </div>
 
-            {/*<div className="Country-container">*/}
-            {/*    {availableCountries?.data.map((countries) => {*/}
-            {/*        //country tussenbouwen voor overview?*/}
-            {/*        return (*/}
-            {/*            <div className="select-options">*/}
-
-            {/*            <input*/}
-            {/*                name="country-name"*/}
-            {/*                value={countries}*/}
-            {/*                onClick={handleOnSubmit}*/}
-            {/*            />*/}
-            {/*            </div>*/}
-            {/*        )})}*/}
-            {/*</div>*/}
+            <div className="Country-container">
+                <select
+                onChange={changeCountry}
+                >
+                {availableCountries?.map((countries) => {
+                    // console.log (countries);
+                    //country tussenbouwen voor overview?
+                    return (
+                        <option
+                            value={countries[1]}
+                        >
+                            {countries[2]}
+                        </option>
+                    )})}
+                </select>
+            </div>
 
             <div className="movie-container">
-
-                <header className="searchbar-container">
-                <form onSubmit={handleOnSubmit}>
-                    {/*//search component maken voor styling?*/}
-                    <input
-                        className="search"
-                        type="text"
-                        placeholder="Search..."
-                        onKeyPress={handleOnChange}
-                    />
-                </form>
-            </header>
+                <div className="column d-inline-block">
 
                 <h1>NEW TO COME:</h1>
 
                 {newData != undefined ? newData.ITEMS?.map((movie) => {
                     //country tussenbouwen voor overview?
+                    console.log (movie?.synopsis.split('<br>'))
                     return (
-                        <div className="movie">
+                        <div className="movie movie-extended">
+
+                            <div className="release-date">
+                                <span>{ movie?.synopsis.split('<br>')[1].replace('<b>New on', '').replace('</b>', '')}</span>
+                            </div>
                             <img className="movie-image" src={movie?.image} alt="movie-img"/>
 
                             <div className="movie-info">
-                                <h3>{movie?.title}</h3>
+                                <h3 className="movie-title">{movie?.title}</h3>
                                 <span>{movie?.date}</span>
                                 {/*<h4> Year: {movie?.year}</h4>*/}
 
                                 <div className="movie-over">
                                     <h2>Overview: </h2>
-                                    <p>{movie?.synopsis}</p>
+                                    <p>{movie?.synopsis.split('<br>')[0]}</p>
                                 </div>
                             </div>
                         </div>
                     )}) : '' }
-            </div>
+                </div>
 
-            <div className="movie-container">
-                <h1> MOVIES TO BE REMOVED:</h1>
-                {oldData != undefined ? oldData.ITEMS?.map((movie) => {
-                    //country tussenbouwen voor overview?
-                    return (
-                        <div className="movie">
-                            <img className="movie-image" src={movie?.image} alt="movie-img"/>
+                <div className="column d-inline-block">
 
-                            <div className="movie-info">
-                                <h3>{movie?.title}</h3>
-                                <span>{movie?.date}</span>
+                    <h1>TO BE REMOVED:</h1>
+                    {oldData != undefined ? oldData.ITEMS?.map((movie) => {
+                        //country tussenbouwen voor overview?
+                        return (
+                            <div className="movie movie-extended">
+                                <img className="movie-image" src={movie?.image} alt="movie-img"/>
 
-                                <div className="movie-over">
-                                    <h2>Overview: </h2>
-                                    <p>{movie?.synopsis}</p>
+                                <div className="movie-info">
+                                    <h3 className="movie-title">{movie?.title}</h3>
+                                    <span>{movie?.date}</span>
+                                    {/*<h4> Year: {movie?.year}</h4>*/}
+
+                                    <div className="movie-over">
+                                        <h2>Overview: </h2>
+                                        <p>{movie?.synopsis}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )}) : '' }
+                        )}) : '' }
+                </div>
             </div>
         </div>
     )

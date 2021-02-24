@@ -9,7 +9,7 @@ export default function StartPage () {
             <div>
                 <div className="start-information">
                     <h1>WELCOME!</h1>
-                    <h2>On this website you can look up old and new content from Netflix and check the availability per country. </h2>
+                    <h2>On this website you can see which content of Netflix is still available and which content will be added or removed, per country. </h2>
                 </div>
             </div>
         </div>
