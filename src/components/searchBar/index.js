@@ -110,7 +110,7 @@ function SearchBar () {
                         className="movie"
                         onClick={() => {handleOnClick (movie?.nfid) }}
                     >
-                    <img className="movie-image" src={movie?.img} alt="movie-img"/>
+                    <img className="movie-image" src={movie?.img} alt="movie-img" key={movie?.id}/>
 
                 <div className="movie-info">
                         <h3>{movie?.title}</h3>

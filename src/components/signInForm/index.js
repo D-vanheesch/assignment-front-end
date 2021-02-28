@@ -39,9 +39,9 @@ export default function SignInForm () {
         } catch(e) {
             console.error (e);
             if (e.message.includes('401')) {
-                setError ('Gebruikersnaam of wachtwoord is onjuist.')
+                setError ('Username or password is incorrect.')
             } else {
-                setError ('Inloggen is helaas mislukt, probeer het nogmaals.')
+                setError ('Sign in failed, please try again.')
             }
             //tip: als de gebruikersnaam niet bestaat of ww is verkeerd, stuurt de backend een 401
         }

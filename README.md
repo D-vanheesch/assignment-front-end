@@ -1,3 +1,0 @@
-Installatie handleiding:
-
-inhoud.
