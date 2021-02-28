@@ -1,20 +1,13 @@
-import React, {useEffect, useContext} from 'react';
-import {useHistory} from 'react-router-dom'
-import { AuthContext , useAuthState} from "../../context/AuthContext";
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom'
+import { AuthContext , useAuthState } from "../../context/AuthContext";
 import './Header.css'
 
 export default function Header () {
     const history = useHistory();
 
-    //context
     const { isAuthenticated } = useAuthState();
     const {logout} = useContext(AuthContext);
-
-    // useEffect(() => {
-    //     if (isAuthenticated === false) {
-    //         history.push('/signin')
-    //     }
-    // }, [isAuthenticated]);
 
     return (
         <header>
@@ -70,17 +63,6 @@ export default function Header () {
                 >
                     My profile
                 </button>
-
-                    {/*<div className="buttons-logout">*/}
-                    {/*<button*/}
-                    {/*    className="buttons-header"*/}
-                    {/*    type="button"*/}
-                    {/*    onClick={logout}*/}
-                    {/*>*/}
-                    {/*    Log out*/}
-
-                    {/*    </button>*/}
-                    {/*</div>*/}
 
             </div>
             </div>

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useContext} from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 
 const AuthContext = createContext({});
 
@@ -10,11 +10,8 @@ function AuthContextProvider ({ children }) {
     });
 
     useEffect (() => {
-        // life cicle, wanneer iets getriggert wordt
-        // anoniem & dependicy.
 
         setTimeout(() => {
-            // er is geen token, dus we beginnen met schone lei!
             setAuthState({
                 //spread operator:
                 ...authState,
@@ -24,11 +21,9 @@ function AuthContextProvider ({ children }) {
     }, [] );
 
     function login (data) {
-        //token in localstorage
         console.log (data)
         localStorage.setItem('accessToken', data.accessToken);
 
-        // user informatie in context plaatsen
         setAuthState({
             ...authState,
             user: {
@@ -37,26 +32,15 @@ function AuthContextProvider ({ children }) {
                 roles: data.roles,
             }
         });
-        //als dat eenmaal gelukt is, link door naar profielpagina
-        //dit doen we in het component zelf.
     }
 
     function logout () {
-        //local storage leeg maken
-        //haal de user uit de context-state
         localStorage.clear();
         setAuthState({
             ...authState,
             user: null,
         })
     }
-
-    //deze zou ook bij return authcontext.provider gezet kunnen worden (check providerData!)
-    // const providerData = {
-    //     ...authState,
-    //     login,
-    //     logout,
-    // }
 
     return (
         <AuthContext.Provider value={{...authState, login, logout}}>
@@ -71,8 +55,6 @@ function useAuthState () {
 
     const isDone = authState.status === 'done';
     const isAuthenticated = authState.user !== null && isDone;
-
-    //console.log ('authenticated', isAuthenticated);
 
     return {
         ...authState,

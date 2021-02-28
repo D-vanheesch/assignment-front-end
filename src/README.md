@@ -1,6 +1,6 @@
-## INSTALLATIE HANDLEIDING.
+## INSTALLATION GUIDE
 
-****1. Inleiding****
+****1. Introduction****
    This application is built to clarify availability of Netflix content by country.
    For example, the application shows which films and series are available per country and which films and series are available per country
    will be added and will be picked up soon. Also here are the dates when this will happen and Imdb ratings are visible.
@@ -23,7 +23,7 @@ You will need to use the following key: ('adc43e01efmsh4e33b30d1f57ef9p1c5965jsn
   - 'https://unogsng.p.rapidapi.com/search'
   - 'https://unogs-unogs-v1.p.rapidapi.com/aaapi.cgi'
   
-- Install Node.js and NPM. Instructions can be found on the following website: ('https://www.npm.js.com/get-npm').
+- Install Node.js and NPM. Instructions can be found on the following website: ('https://www.npmjs.com/get-npm').
 - Install Axios in your terminal -> `npm install axios`
 - Install react-router-dom -> `npm install react-router-dom`
 - Install react-hook-form -> `npm install react-hook-form`

@@ -1,14 +1,13 @@
-import React, {useState, useEffect, useMemo} from 'react';
+import React, { useState, useEffect } from 'react';
 import "./ProfilePage.css";
 import axios from "axios";
-import {useAuthState} from "../../context/AuthContext";
+import { useAuthState } from "../../context/AuthContext";
 
 export default function ProfilePage () {
 
     const [newData, setNewData] = useState();
     const [oldData, setOldData] = useState();
-    const [search, setSearch] = useState('')
-    const [isSearched, setIsSearched] = useState(false);
+    const [search, setSearch] = useState(false)
     const [availableCountries, setAvailableCountries] = useState();
 
     const { user } = useAuthState();
@@ -21,18 +20,9 @@ export default function ProfilePage () {
     useEffect(() => {
         getNetflixContent(countryCode);
         getNetflixContent(countryCode, true);
-        setIsSearched(true);
+        setSearch(true);
     }, [search])
 
-
-    /**
-     * getNetflixContent, get old and new netflix content per country
-     *
-     * @param countryCodeInput 'supply the country code'
-     * @param isExp 'default false, returns old data or new data'
-     *
-     * @return bool | array
-     */
     function getNetflixContent (countryCodeInput, isExp=false) {
         let period = 'new7';
         if (isExp) {
@@ -59,7 +49,7 @@ export default function ProfilePage () {
             } else {
                 setNewData(response.data);
             }
-        })
+        });
     }
 
     const options = {
@@ -88,29 +78,12 @@ export default function ProfilePage () {
         getCountries();
     }, [search]);
 
-    const handleOnSubmit = (e) => {
-        e.preventDefault ();
-    }
-
-    const handleOnChange = (e) => {
-        if (e.charCode === 13) {
-            setSearch(e.target.value);
-        }
-    }
 
     const changeCountry = (e) => {
         getNetflixContent(e.target.value);
         getNetflixContent(e.target.value, true);
         console.log (e.target.value)
-        }
-
-
-    // console.log ("check:",availableCountries);
-
-    // console.log ('---------NEWDATA:-----------')
-    // console.log (newData);
-    // console.log ('--------OLDDATA:------------')
-    // console.log (oldData);
+        };
 
     return (
         <div>
@@ -133,7 +106,6 @@ export default function ProfilePage () {
                             onChange={ changeCountry }
                     >
                         { availableCountries?.map (( countries ) => {
-                            // console.log (countries);
                             return (
                                 <option className="select-container-option"
                                         value={ countries[1] }
@@ -141,7 +113,7 @@ export default function ProfilePage () {
                                 >
                                     { countries[2] }
                                 </option>
-                            )
+                            );
                         }) }
                     </select>
                 </div>
@@ -210,4 +182,4 @@ export default function ProfilePage () {
             </div>
         </div>
     );
-}
+};

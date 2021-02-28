@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -18,7 +19,7 @@ body {
 .searchbar-container {
     display: flex;
     background-color: transparent;
-    padding: 1rem;
+    padding-right: 120px;
     justify-content: center;
 }
 
@@ -114,7 +115,18 @@ body {
     display: flex;
 }
 
-
-/*.image-container:hover {*/
-/*    transform: scale(1.08);*/
-/*}*/
+.home-information {
+    background: -webkit-linear-gradient(#CC3300, #660033);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    box-sizing: border-box;
+    margin-left: 25%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    border: 5px solid;
+    border-color: #660033 #CC3300;
+    width: 40%;
+}

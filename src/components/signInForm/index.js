@@ -1,9 +1,9 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import './SignInForm.css';
 import { useForm } from "react-hook-form";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
-import {AuthContext, useAuthState} from "../../context/AuthContext";
+import { AuthContext, useAuthState } from "../../context/AuthContext";
 import FormErrorSignIn from "./FormErrorSignIn";
 
 export default function SignInForm () {
@@ -34,7 +34,6 @@ export default function SignInForm () {
                     password: data.password,
                 });
 
-            //handel het inloggen aan de voorkant af in de context met de data die we binnen hebben gekregen!
             login (response.data);
         } catch(e) {
             console.error (e);
@@ -43,14 +42,12 @@ export default function SignInForm () {
             } else {
                 setError ('Sign in failed, please try again.')
             }
-            //tip: als de gebruikersnaam niet bestaat of ww is verkeerd, stuurt de backend een 401
         }
         toggleLoading(false);
 
     }
 
     return <form onSubmit={handleSubmit(onSubmit)}>
-
 
         <div className="flow">
             <div className="cont">
@@ -69,15 +66,15 @@ export default function SignInForm () {
             })}
         />
             <FormErrorSignIn
-                condition={errors.name?.type === 'required'}
+                condition={errors.username?.type === 'required'}
                 message={"Please fill in your username."}
             />
             <FormErrorSignIn
-                condition={errors.name?.type === 'minLength'}
+                condition={errors.username?.type === 'minLength'}
                 message={"Your username must be at least 6 characters long."}
             />
             <FormErrorSignIn
-                condition={errors.name?.type === 'pattern'}
+                condition={errors.username?.type === 'pattern'}
                 message={"Your username must have a pattern from a to z and no random marks."}
             />
 
@@ -92,11 +89,11 @@ export default function SignInForm () {
             })}
         />
         <FormErrorSignIn
-            condition={errors.name?.type === 'required'}
+            condition={errors.password?.type === 'required'}
             message={"This field is required."}
         />
         <FormErrorSignIn
-            condition={errors.name?.type === 'minLength'}
+            condition={errors.password?.type === 'minLength'}
             message={"Your password must be at least 6 characters long."}
         />
 

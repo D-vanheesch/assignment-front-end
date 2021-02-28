@@ -1,14 +1,13 @@
-import React, {useRef, useState} from "react";
+import React, { useRef, useState } from "react";
 import './SignUpForm.css'
 import { useForm } from "react-hook-form";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import FormErrorSignUp from "./FormErrorSignUp";
 
 export default function SignUpForm () {
     const { register, handleSubmit, errors, watch } = useForm();
 
-    //state voor gebruikers feedback
     const [createUserSuccess, setCreateUserSuccess] = useState(false );
     const [loading, toggleLoading] = useState(false);
     const [error, setError] = useState('')
@@ -46,28 +45,9 @@ export default function SignUpForm () {
         toggleLoading(false);
     }
 
-    //implementeer loading en error in beide formulieren
-    //zorg ervoor dat de knoppen disabled zijn tijdens het laden en dat de gebruiker dat ziet
-    //zorg ervoor dat als er iets mis gaat , dit met de gebruiker wordt gecommuniceerd.
-
-        //niks met context
-        //gebruik de data uit het formulier om een gebruiker aan te maken (check docu)
-        //kijk goed wat je terugkrijgt!
-        //Als het is gelukt, willen we in DIT component opslaan dat het gelukt is.
-        //Als het gelukt is, willen we een berichtje laten zien in de HTML, zoals:
-        //{/*{ createSucces } === true <p>yeey het is gelukt! Je kunt hier inloggen...LINK</p>*/}
-
-
-
     return <form onSubmit={handleSubmit(onSubmit)}>
 
         <div className="flow">
-
-            <div className="registration">
-        {createUserSuccess === true && (
-            <p>Registration is successfull! Click <Link to="/signin">here</Link> to sign in. </p>
-        )}
-            </div>
 
         <div className="cont">
             <div className="form">
@@ -84,10 +64,6 @@ export default function SignUpForm () {
                 validate: (value) => value.includes('@'),
             })}
         />
-        <FormErrorSignUp
-            condition={errors.email?.type === 'required'}
-            message={"This field is required."}
-        />
 
         <label htmlFor="username-details">Username:</label>
         <input
@@ -100,19 +76,19 @@ export default function SignUpForm () {
                 pattern: /^[a-zA-Z]*$/,
             })}
         />
+
         <FormErrorSignUp
-            condition={errors.name?.type === 'required'}
+            condition={errors.username?.type === 'required'}
             message={"This field is required."}
             />
         <FormErrorSignUp
-             condition={errors.name?.type === 'minLength'}
+             condition={errors.username?.type === 'minLength'}
              message={"Your username must be at least 6 characters long."}
             />
             <FormErrorSignUp
-                condition={errors.name?.type === 'pattern'}
+                condition={errors.username?.type === 'pattern'}
                 message={"Your username must have a pattern from a to z with no random marks."}
                 />
-
 
         <label htmlFor="password-details">Password:</label>
         <input
@@ -132,8 +108,6 @@ export default function SignUpForm () {
             condition={errors.password?.type === 'minLength'}
             message={"Your password must be at least 6 characters long"}
         />
-
-
 
         <label htmlFor="password-details-confirm">Confirm password:</label>
         <input
@@ -169,12 +143,13 @@ export default function SignUpForm () {
         <div className="below-text">
             <h2>Already have an account? <Link to="/Signin">Sign in</Link> </h2>
         </div>
-
+                    <div className="registration">
+                {createUserSuccess === true && (
+                    <p>*Registration is successfull! Click <Link to="/signin">here</Link> to sign in. </p>
+                )}
+                    </div>
             </div>
-
         </div>
-
         </div>
-
     </form>
 }

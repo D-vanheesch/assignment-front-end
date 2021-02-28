@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import './SearchBar.css'
 import axios from "axios";
 
@@ -37,8 +37,6 @@ function SearchBar () {
         getMovies();
     }, [ search ]);
 
-    // console.log ("data:", movies);
-
     const handleOnSubmit = (e) => {
         e.preventDefault ();
 }
@@ -46,8 +44,7 @@ function SearchBar () {
     const handleOnChange = (e) => {
     if (e.charCode === 13) {
         setSearch(e.target.value);
-    }
-    }
+    }};
 
     const handleOnClick = (netflixId) => {
         const options = {
@@ -65,20 +62,17 @@ function SearchBar () {
         }).catch(function (error) {
             console.error(error);
         });
-        // if (e.charCode === 13) {
-        //     setSearch(e.target.value);
-        // }
-    }
+    };
 
     return (
         <>
-            <div className="">
-
+            <div className="home-information">
+                <h2>You can search for your favorite movies or series.</h2>
+                <h2>When clicking on a movie or serie, the availability in countries will pop up.</h2>
             </div>
 
             <header className="searchbar-container">
                 <form onSubmit={handleOnSubmit}>
-                {/*//search component maken voor styling?*/}
                     <input
                         className="search"
                         type="text"
@@ -98,13 +92,11 @@ function SearchBar () {
                             {country?.country}
                         </div>
 
-                    )})}
+                    )})};
             </div>
 
             <div className="movie-container">
             {movies?.map((movie) => {
-                //country tussenbouwen voor overview?
-
                 return (
                     <div
                         className="movie"
@@ -123,10 +115,10 @@ function SearchBar () {
                         </div>
                 </div>
                     </div>
-                )})}
+                )})};
             </div>
         </>
-    )
-}
+    );
+};
 
 export default SearchBar;
